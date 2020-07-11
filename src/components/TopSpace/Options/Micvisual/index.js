@@ -1,7 +1,12 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import './index.css'
-import { flip_micVisual } from '../../../../redux/actions'
+import {forward_micVisual, backward_micVisual, prev_page} from '../../../../redux/actions'
+import {Button, IconButton} from "@material-ui/core"
+import MenuSwitch from"../../../PopMenu/MenuSwitch"
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+
 
 // This code only works if the initial state is Off. It's surprisingly way harder
 // to get this to work if you want the inital state of the checkbox to be checked.
@@ -35,14 +40,28 @@ export default function Micvisual(props) {
      }
 
      return (
-          <div>
-              {result}
-               <div className="audio_visual">
-                    <button className="audio_plus"
-                         onClick={() => dispatch(flip_micVisual())} >{text}</button>
-
-               </div>
-          </div>
+         <div className="audio_result">
+             MONO
+             <div className="audio_visual">
+                 <IconButton color = 'inherit' onClick = {()=>(dispatch(backward_micVisual()))}>
+                     <ArrowBackIosIcon />
+                 </IconButton>
+                 {text}
+                 <IconButton color = 'inherit' onClick = {()=>(dispatch(forward_micVisual()))}>
+                     <ArrowForwardIosIcon />
+                 </IconButton>
+             </div>
+        </div>
+         // <MenuSwitch title = {text}/>
+          // <div className="audio_result">
+          //     {result}
+          //      <div className="audio_visual">
+          //           <Button className="audio_plus" color = "inherit" variant = "outlined"
+          //                onClick={() => dispatch(flip_micVisual())} >{text}
+          //           </Button>
+          //
+          //      </div>
+          // </div>
      )
 }
 
